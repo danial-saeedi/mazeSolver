@@ -32,17 +32,43 @@ void readMap(char address[],int map[M][N])
 	fin.close();
 }
 
+void findTheMouse(int map[M][N],int &x,int &y)
+{
+	bool endOfLoop = false;
+	for (int i=0; i<M; i++) 
+    { 
+    	if(endOfLoop == false)
+    	{
+    		for (int j=0; j<N; j++) 
+	        {
+	        	if(map[i][j] == 2)
+				{
+					x = i;
+					y = j;
+					endOfLoop = true;
+	        		break;
+				}
+			}
+	    }
+		else
+		{
+			break;
+		}
+	}
+}
+
 int main()
 {
 	int map[M][N];
+	int mouseX;
+	int mouseY;
 	readMap("map.txt",map);
 	
-	for (int i=0; i<M; i++) 
-    { 
-        for (int j=0; j<N; j++) 
-           cout << map[i][j] << " "; 
-        cout << endl; 
-    }
+	//Find position of the mouse
+	findTheMouse(map,mouseX,mouseY);
+	
+
+	cout << mouseX << " " << mouseY;
 
 	return 0;
 }
